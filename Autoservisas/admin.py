@@ -4,7 +4,6 @@ from django.contrib import admin
 
 from .models import Paslauga, AutomobilioModelis, AutomobilisKlientas, Uzsakymas, UzsakymoEilute
 
-
 class UzsakymoEiluteInline(admin.TabularInline):
     model = UzsakymoEilute
     extra = 1
@@ -12,7 +11,6 @@ class UzsakymoEiluteInline(admin.TabularInline):
 class UzsakymasAdmin(admin.ModelAdmin):
     list_display = ('automobilis', 'data', 'statusas')
     inlines = [UzsakymoEiluteInline]
-
 
 class AutomobilisKlientasAdmin(admin.ModelAdmin):
     list_display = ('klientas', 'modelis', 'valstybinis_nr', 'vin_kodas')
