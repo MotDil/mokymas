@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Automobilių servisas</h1>
+<p>Serviso statistika:</p>
+<ul>
+    <li><strong>Paslaugų kiekis:</strong> {{ sk_paslauga }}</li>
+    <li><strong>Atliktų užsakymų kiekis</strong>: {{ sk_uzsakymas }}</li>
+    <li><strong>Automobilių kiekis</strong>: {{ sk_automobiliskliento }}</li>
+</ul>
+{% endblock %}
