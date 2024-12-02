@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Kliento informacija</h1>
+
+<p><strong>Klientas:</strong> {{ detalus.automobilis.klientas }}</p>
+<p><strong>Automobilis:</strong> {{ detalus.automobilis.modelis }}</p>
+<p><strong>Data:</strong> {{ detalus.data }}</p>
+<p><strong>Statusas:</strong><span class="{% if detalus.statusas == 'L' %}text-danger{% elif detalus.statusas == 'V' %}text-warning{% elif detalus.statusas == 'A' %}text-success{% endif %}">
+        {{ detalus.get_statusas_display }}</span>
+</p>
+
+<h2>Užsakymo informacija</h2>
+<ul>
+    {% for eilute in eilutes %}
+    <li>
+        Paslauga: {{ eilute.paslauga.pavadinimas }} - Kiekis: {{ eilute.kiekis }} - Kaina: {{ eilute.paslauga.kaina }} EUR
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+
+

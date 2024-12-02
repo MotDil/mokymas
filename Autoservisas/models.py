@@ -26,7 +26,7 @@ class AutomobilioModelis(models.Model):
         ordering = ['marke']
 
     def __str__(self):
-        return f"Automobilio modelis: {self.metai}, {self.marke}, {self.modelis}, {self.variklis}"
+        return f"{self.marke}, {self.metai}, {self.modelis}, {self.variklis}"
 
 class AutomobilisKlientas(models.Model):
     valstybinis_nr = models.CharField('VALSTYBINIS_NUMERIS', max_length=15, unique=True, help_text='Įveskite automobilio valstybinius numerius')
@@ -56,13 +56,13 @@ class Uzsakymas(models.Model):
     class Meta:
         verbose_name = 'Užsakymas'
         verbose_name_plural = 'Užsakymai'
-        ordering = ['data']
+        ordering = ['statusas']
 
     def __str__(self):
         return f"{self.automobilis}, {self.data}"
 
 class UzsakymoEilute(models.Model):
-    uzsakymas = models.ForeignKey(Uzsakymas, on_delete=models.CASCADE, help_text='Įveskite užsakymo ID')
+    uzsakymas = models.ForeignKey(Uzsakymas, on_delete=models.CASCADE, help_text='Pasirinkite uzsakyma')
     paslauga = models.ForeignKey(Paslauga, on_delete=models.CASCADE, help_text='Pasirinkite paslaugas')
     kiekis = models.IntegerField('KIEKIS', help_text='Įveskite paslaugų kiekį')
 

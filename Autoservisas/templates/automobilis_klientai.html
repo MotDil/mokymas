@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Automobilio modelis: {{ modelis.marke }} {{ modelis.modelis }} ({{ modelis.metai }})</h1>
+  <p><strong>Variklis:</strong> {{ modelis.variklis }}</p>
+  <h2>Užregistruoti klientai:</h2>
+    <ol>
+      {% for klientas in klientai %}
+        <li>{{ klientas.klientas }} - Valstybinis Nr.: {{ klientas.valstybinis_nr }}, VIN: {{ klientas.vin_kodas }}</li>
+      {% endfor %}
+    </ol>
+{% endblock %}
+

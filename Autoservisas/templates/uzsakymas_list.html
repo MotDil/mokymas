@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Užsakymų sąrašas</h1>
+<ol>
+    {% for uzsakymas in uzsakymas_list %}
+    <li>
+        <a href="{% url 'uzsakymas_detail' uzsakymas.pk %}">{{ uzsakymas.automobilis }}</a>
+        {{ uzsakymas.data }} -
+        <span class="{% if uzsakymas.statusas == 'L' %}text-danger{% elif uzsakymas.statusas == 'V' %}text-warning{% elif uzsakymas.statusas == 'A' %}text-success{% endif %}">
+            {{ uzsakymas.get_statusas_display }}
+        </span>
+    </li>
+    {% endfor %}
+</ol>
+{% endblock %}
