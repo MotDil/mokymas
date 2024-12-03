@@ -15,7 +15,7 @@
           {% endif %}
           <div class="card-body">
             <h6 class="card-subtitle mb-2 text-muted">{{ automobilis.marke }} {{ automobilis.modelis }} ({{ automobilis.metai }})</h6>
-            <p class="card-text"><a href="{% url 'automobilis_klientai' automobilis.id %}">Variklis: {{ automobilis.variklis }}</a></p>
+            <p class="card-text"><a href="{% url 'automobilis_klientai' automobilis.id %}">{{ automobilis.variklis }}</a></p>
           </div>
         </div>
       </div>
