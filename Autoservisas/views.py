@@ -1,5 +1,7 @@
 from lib2to3.fixes.fix_input import context
 
+from django.core.paginator import Paginator
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from .models import Paslauga, Uzsakymas, AutomobilisKlientas, AutomobilioModelis, UzsakymoEilute
@@ -15,7 +17,10 @@ def index(request):
     return render(request, 'index.html', context=statistika)
 
 def automobiliu_sarasas(request):
-    automobiliai =AutomobilioModelis.objects.all()
+    paginator = Paginator(AutomobilioModelis.objects.all(), 2)
+    page_number = request.GET.get('page')
+    automobiliai = paginator.get_page(page_number)
+    # automobiliai =AutomobilioModelis.objects.all()
     return render(request, 'automobiliai.html', {'automobiliai': automobiliai})
 
 def automobilis_klientai(request, modelis_id):
@@ -30,6 +35,7 @@ def automobilis_klientai(request, modelis_id):
 
 class UzsakymaiListView(generic.ListView):
     model = Uzsakymas
+    paginate_by = 3
     template_name = 'uzsakymas_list.html'
 
 class UzsakymasDetailView(generic.DetailView):
@@ -41,6 +47,18 @@ class UzsakymasDetailView(generic.DetailView):
         context = super(UzsakymasDetailView, self).get_context_data(**kwargs)
         context['eilutes'] = self.object.uzsakymoeilute_set.all
         return context
+
+def search(request):
+
+    query = request.GET.get('query')
+    search_results = AutomobilisKlientas.objects.filter(
+        Q(klientas__icontains=query) |
+        Q(modelis__marke__icontains=query) |
+        Q(modelis__modelis__icontains=query) |
+        Q(valstybinis_nr__icontains=query) |
+        Q(vin_kodas__icontains=query)
+    )
+    return render(request, 'search.html', {'automobiliai': search_results, 'query': query})
 
 
 

@@ -6,7 +6,7 @@
   <h2>Užregistruoti klientai:</h2>
     <ol>
       {% for klientas in klientai %}
-        <li>{{ klientas.klientas }} - Valstybinis Nr.: {{ klientas.valstybinis_nr }}, VIN: {{ klientas.vin_kodas }}</li>
+        <li><a href="{% url 'uzsakymas_detail' klientas.uzsakymas_set.first.pk %}">{{ klientas.klientas }} - Valstybinis Nr.: {{ klientas.valstybinis_nr }}, VIN: {{ klientas.vin_kodas }}</a></li>
       {% endfor %}
     </ol>
 {% endblock %}

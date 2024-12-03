@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Paieškos pagal "{{ query }}" rezultatai:</h1>
+  <br>
+  {% if automobiliai %}
+  <ul>
+    {% for automobilis in automobiliai %}
+      <li>
+        <a href="{% url 'automobilis_klientai' automobilis.id %}">{{ automobilis.klientas }} - {{ automobilis.modelis.marke }} - {{ automobilis.valstybinis_nr }} - {{ automobilis.modelis.modelis }} - {{ automobilis.vin_kodas }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Oops. Nieko neradome :(</p>
+  {% endif %}
+{% endblock %}

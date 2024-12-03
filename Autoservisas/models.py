@@ -19,6 +19,7 @@ class AutomobilioModelis(models.Model):
     marke = models.CharField('AUTOMOBILIO_MARKĖ', max_length=20, help_text='Įveskite automobilio markę')
     modelis = models.CharField('AUTOMOBILIO_MODELIS', max_length=20, help_text='Įveskite automobilio modelį pvz. A4, M3, F10, G30, GS, LS')
     variklis = models.CharField('VARIKLIS', max_length=50, help_text='Įveskite varikio parametrus: litražą, kilovatus, kuro tipą')
+    virselis = models.ImageField('Viršelis', upload_to='nuotraukos', null=True)
 
     class Meta:
         verbose_name = 'Automobilio modelis'
