@@ -6,8 +6,6 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from .models import Paslauga, Uzsakymas, AutomobilisKlientas, AutomobilioModelis, UzsakymoEilute
 
-
-# Index view for displaying statistics
 def index(request):
     statistika = {
         'sk_paslauga': Paslauga.objects.count(),
