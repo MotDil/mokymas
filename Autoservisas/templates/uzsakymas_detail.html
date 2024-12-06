@@ -22,11 +22,11 @@
 </ul>
 </br>
     <h4>Komentarai:</h4>
-    {% if detalus.komentarai.all %}
-      {% for komentaras in detalus.komentarai.all %}
+    {% if detalus.komentaras_set.all %}
+      {% for kom in detalus.komentaras_set.all %}
         <hr>
-        <strong>{{ komentaras.vartotojas }}</strong>, <em>{{ komentaras.data }}</em>
-        <p>{{ komentaras.turinys }}</p>
+        <strong>{{ kom.vartotojas }}</strong>, <em>{{ kom.data }}</em>
+        <p>{{ kom.turinys }}</p>
       {% endfor %}
     {% else %}
       <p>Užsakymas neturi komentarų</p>

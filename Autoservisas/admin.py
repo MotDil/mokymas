@@ -26,7 +26,7 @@ class AutomobilioModelisAdmin(admin.ModelAdmin):
     list_display = ('marke', 'modelis', 'metai', 'variklis')
 
 class KomentarasAdmin(admin.ModelAdmin):
-    list_display = ('uzsakymas_komentaras', 'vartotojas', 'turinys', 'data')
+    list_display = ('uzsakymaskom', 'vartotojas', 'turinys', 'data')
 
 admin.site.register(Komentaras, KomentarasAdmin)
 admin.site.register(Paslauga, PaslaugaAdmin)

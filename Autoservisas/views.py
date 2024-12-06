@@ -68,7 +68,7 @@ class UzsakymasDetailView(FormMixin, generic.DetailView):
 
     # štai čia nurodome, kad knyga bus būtent ta, po kuria komentuojame, o vartotojas bus tas, kuris yra prisijungęs.
     def form_valid(self, form):
-        form.instance.uzsakymas_komentaras = self.object
+        form.instance.uzsakymaskom = self.object
         form.instance.vartotojas = self.request.user
         form.save()
         return super(UzsakymasDetailView, self).form_valid(form)

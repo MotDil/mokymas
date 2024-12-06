@@ -90,7 +90,7 @@ class UzsakymoEilute(models.Model):
         return f"Paslauga: {self.uzsakymas} {self.paslauga} - {self.kiekis} vnt."
 
 class Komentaras(models.Model):
-    uzsakymas_komentaras = models.ForeignKey(Uzsakymas, on_delete=models.CASCADE, related_name='komentarai', blank=True)
+    uzsakymaskom = models.ForeignKey(Uzsakymas, on_delete=models.CASCADE, blank=True)
     vartotojas = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     turinys = models.TextField('KOMENTARAS', max_length=2000)
     data = models.DateTimeField(auto_now_add=True)
