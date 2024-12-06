@@ -5,9 +5,11 @@
 
 <p><strong>Klientas:</strong> {{ detalus.automobilis.klientas }}</p>
 <p><strong>Automobilis:</strong> {{ detalus.automobilis.modelis }}</p>
-<p><strong>Data:</strong> {{ detalus.data }}</p>
+<p><strong>Užsakymo registracijos data:</strong> {{ detalus.data }}</p>
+<p><strong>Numatoma darbų atlikimo data:</strong> {{ detalus.grazinimo_terminas }}</p>
 <p><strong>Statusas:</strong><span class="{% if detalus.statusas == 'L' %}text-danger{% elif detalus.statusas == 'V' %}text-warning{% elif detalus.statusas == 'A' %}text-success{% endif %}">
         {{ detalus.get_statusas_display }}</span>
+<p><strong>Informacija:</strong> {{ detalus.automobilis.informacija | safe}}</p>
 </p>
 
 <h2>Užsakymo informacija</h2>
@@ -18,7 +20,30 @@
     </li>
     {% endfor %}
 </ul>
-{% endblock %}
+</br>
+    <h4>Komentarai:</h4>
+    {% if detalus.komentarai.all %}
+      {% for komentaras in detalus.komentarai.all %}
+        <hr>
+        <strong>{{ komentaras.vartotojas }}</strong>, <em>{{ komentaras.data }}</em>
+        <p>{{ komentaras.turinys }}</p>
+      {% endfor %}
+    {% else %}
+      <p>Užsakymas neturi komentarų</p>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+      <div class="fieldWrapper">
+        <hr><br/>
+        <h4>Palikite Komentarai:</h4>
+        <form action="" method="post">
+          {% csrf_token %}
+          {{ form.turinys }}</br>
+          <input type="submit" value="Išsaugoti">
+        </form>
+      </div>
+      {% endif %}
+    {% endblock %}
 
 
 
