@@ -1,3 +1,4 @@
+from PIL import Image
 from django.contrib.auth.models import User
 from django.db import models
 from datetime import date
@@ -90,7 +91,7 @@ class UzsakymoEilute(models.Model):
         return f"Paslauga: {self.uzsakymas} {self.paslauga} - {self.kiekis} vnt."
 
 class Komentaras(models.Model):
-    uzsakymaskom = models.ForeignKey(Uzsakymas, on_delete=models.CASCADE, blank=True)
+    uzsakymaskom = models.ForeignKey(Uzsakymas, on_delete=models.CASCADE, blank=True, null=True)
     vartotojas = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     turinys = models.TextField('KOMENTARAS', max_length=2000)
     data = models.DateTimeField(auto_now_add=True)
@@ -100,3 +101,21 @@ class Komentaras(models.Model):
         verbose_name_plural = 'Komentarai'
         ordering = ['-data']
 
+class Profilis(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    nuotrauka = models.ImageField(default="profile_pics/no_image.png", upload_to="profile_pics")
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        img = Image.open(self.nuotrauka.path)
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.nuotrauka.path)
+
+    class Meta:
+        verbose_name = 'Profilis'
+        verbose_name_plural = 'Profiliai'
+
+    def __str__(self):
+        return f"{self.user.username} profilis"

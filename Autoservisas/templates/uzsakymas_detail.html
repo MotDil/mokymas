@@ -25,6 +25,7 @@
     {% if detalus.komentaras_set.all %}
       {% for kom in detalus.komentaras_set.all %}
         <hr>
+            <img class="rounded-square img-small" src="{{kom.vartotojas.profilis.nuotrauka.url}}">
         <strong>{{ kom.vartotojas }}</strong>, <em>{{ kom.data }}</em>
         <p>{{ kom.turinys }}</p>
       {% endfor %}

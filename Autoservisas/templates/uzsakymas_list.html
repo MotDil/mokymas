@@ -5,6 +5,7 @@
 <ol>
     {% for uzsakymas in uzsakymas_list %}
     <li>
+        <img class="rounded-square img-small" src="{{uzsakymas.klientas.profilis.nuotrauka.url}}">
         <a href="{% url 'uzsakymas_detail' uzsakymas.pk %}">{{ uzsakymas.automobilis }}</a>
         {{ uzsakymas.data }} -
         <span class="{% if uzsakymas.statusas == 'L' %}text-danger{% elif uzsakymas.statusas == 'V' %}text-warning{% elif uzsakymas.statusas == 'A' %}text-success{% endif %}">
